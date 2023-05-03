@@ -1,36 +1,39 @@
 import React, {MouseEvent, useState} from 'react';
 import './App.css';
-import {Button} from './Components/Button';
+import {Component} from './Components/Component';
+
+export type FilterType = 'All' | 'Dollars' | 'RUBLS';
 
 const App = () => {
-    // const Button1Foo = (subscriber: string, age: number) => {
-    //     console.log(subscriber, age)
-    // }
-    // const Button2Foo = (subscriber: string, age: number) => {
-    //     console.log(subscriber, age)
-    // }
-    // const Button3Foo = (text: string) => {
-    //     console.log(text)
-    // }
-    let [a, setA] = useState(1)
-    const onClickFoo = () => {
-        console.log(a)
-        setA(++a)
+
+    const [money, setMoney] = useState([
+        {banknots: 'Dollars', value: 100, number: ' a1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' z1234567890'},
+        {banknots: 'RUBLS', value: 100, number: ' w1234567890'},
+        {banknots: 'Dollars', value: 100, number: ' e1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' c1234567890'},
+        {banknots: 'RUBLS', value: 100, number: ' r1234567890'},
+        {banknots: 'Dollars', value: 50, number: ' x1234567890'},
+        {banknots: 'RUBLS', value: 50, number: ' v1234567890'},
+    ])
+
+    const [filter, setFilter] = useState<FilterType>('All')
+
+    let currentMoney = money;
+    if (filter === 'Dollars') {
+        currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'Dollars')
     }
-    const onClickFoo0 = () => {
-        setA(0)
+    if (filter === 'RUBLS') {
+        currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'RUBLS')
     }
+
+    const onclickFilterHundler = (nameButton: FilterType) => {
+        setFilter(nameButton)
+    }
+
     return (
         <div className="App">
-            {/*<Button name={'MyYouTubeChanel-1'}*/}
-            {/*        callback={() => Button1Foo('Vasya', 11)}/>*/}
-            {/*<Button name={'MyYouTubeChanel-2'}*/}
-            {/*        callback={() => Button2Foo('Ivan', 100)}/>*/}
-            {/*<Button name={'MyYouTubeChanel-3'}*/}
-            {/*        callback={() => Button3Foo('Im stupid button')}/>*/}
-            <h1>{a}</h1>
-            <button onClick={onClickFoo}>number</button>
-            <button onClick={onClickFoo0}>0</button>
+            <Component currentMoney={currentMoney} onclickFilterHundler={onclickFilterHundler}/>
         </div>
     )
 }
