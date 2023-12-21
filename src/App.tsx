@@ -1,18 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Button} from './Components/Button';
 
 const App = () => {
+    let [A, setA] = useState(1)
     const Foo1 = () => {
-        console.log('Message 1')
+        setA(A-1)
     }
-    const Foo2 = (mes: string) => {
-        console.log(mes+' привет')
+    const Foo2 = () => {
+        setA(A+1)
+    }
+    const Foo3 = () => {
+        setA(A=0)
     }
     return (
         <div className="App">
-            <Button name={'Button 1'} onClickHandler={Foo1}/>
-            <Button name={'Button 2'} onClickHandler={()=>Foo2('Message 2')}/>
+            <div>{A}</div>
+            <Button name={'-'} onClickHandler={Foo1}/>
+            <Button name={'+'} onClickHandler={Foo2}/>
+            <Button name={'0'} onClickHandler={Foo3}/>
         </div>
     )
 }
