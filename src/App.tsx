@@ -1,17 +1,18 @@
 import React from 'react';
 import './App.css';
-import {Component} from './Components/Component';
+import {Button} from './Components/Button';
 
 const App = () => {
-    let data = [
-        {manufacturer:'BMW', model:'m5cs'},
-        {manufacturer:'Mercedes', model:'e63s'},
-        {manufacturer:'Audi', model:'rs6'}
-    ]
-
+    const Foo1 = () => {
+        console.log('Message 1')
+    }
+    const Foo2 = (mes: string) => {
+        console.log(mes+' привет')
+    }
     return (
         <div className="App">
-            <Component data={data}/>
+            <Button name={'Button 1'} onClickHandler={Foo1}/>
+            <Button name={'Button 2'} onClickHandler={()=>Foo2('Message 2')}/>
         </div>
     )
 }
