@@ -1,6 +1,8 @@
-import React, {Fragment, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import {FullInput} from './Components/FullInput';
+// import {FullInput} from './Components/FullInput';
+import {Button} from './Components/Button';
+import {Input} from './Components/Input';
 
 const App = () => {
     const [message, setMessage] = useState([
@@ -9,19 +11,20 @@ const App = () => {
         {message: 'Message 3'},
     ])
 
-    function addMessage (title: string) {
+    let [title, setTitle] = useState('')
+
+    function addMessage() {
         let NewMessage = {message: title}
         setMessage([NewMessage, ...message])
+        setTitle('')
     }
 
     return (
         <div className="App">
-            <div>
-                <FullInput addMessage={addMessage}/>
-                <div>
-                    {message.map((el, index) => <div key={index}>{el.message}</div>)}
-                </div>
-            </div>
+                {/*<FullInput addMessage={addMessage}/>*/}
+                <Input title={title} setTitle={setTitle}/>
+                <Button name={'+'} addMessage={addMessage}/>
+            {message.map((el, index) => <div key={index}>{el.message}</div>)}
         </div>
     )
 }
